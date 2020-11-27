@@ -8,57 +8,62 @@ app.use(bodyParser.json());
 app.use(cors());
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
+const Shopify = require('shopify-api-node');
+const shopify2 = new Shopify({
+  shopName:  'wigs-store',
+  apiKey: 'def0b879df143c2b3575391121b3272a',
+  password: 'fec6c84d5f2364000732aea5236ab11d',
+  autoLimit: true,
+bucketSize: { calls: 5, interval: 1000, bucketSize:  35}, 
+});
+const shopify1 = new Shopify({
+  shopName:  'wigscom',
+  apiKey: 'dc84bc74af0be2b7757756c4fea170f7',
+  password: '046fd5d3c21a33d038aeebb050e3d500',
+  autoLimit: true,
+bucketSize: { calls: 5, interval: 1000, bucketSize:  35}, 
+});
 
-let Survey = require("./model/name.js");
 app.use(express.static("public"));
 
 const path = __dirname + "/views/";
 
-var customers = [];
-const MONGODB_URI = process.env.MONGODB_URI;
-console.log("Connecting DB to ", MONGODB_URI);
 
-mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(x =>
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  )
-  .catch(err => console.error("Error connecting to mongo", err));
-router.use(function(req, res, next) {
-  console.log("/" + req.method);
-  next();
-});
 
 app.get("/", function(req, res) {
   res.sendFile(path + "index.html");
 });
 
-app.post("/api/customers/save", function(req, res) {
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const date = Date.parse(req.body.date);
-  const review = req.body.review;
-  mark = req.body.mark;
-  const newSurvey = new Survey({
-    firstname,
-    lastname,
-    date,
-    review,
-    mark
-  });
-  console.log("name", newSurvey);
-  newSurvey
-    .save()
-    .then(() => res.json("Info added!"))
-    .catch(err => res.status(400).json("Error: " + err));
+app.post("/wigscom", function(req, res) {
+  shopify.theme
+  .create({
+    "name": "New-theme",
+    "src": "http://themes.shopify.com/theme.zip",
+    "role": "main"
+  })
+  .then(
+    (theme) => console.log(theme),
+    (err) => console.error(err)
+  );
 });
-
-app.get("/api/reviews", function(req, res) {
-  Survey.find()
-    .then(survey => res.json(survey))
-    .catch(err => res.status(400).json("Error" + err));
-  //   return res.send(customers);
+app.post("/wigoutlet", function(req, res) {
+  shopify.theme
+  .create({
+    "name": "New-theme",
+    "src": "http://themes.shopify.com/theme.zip",
+    "role": "main"
+  })
+  .then(
+    (theme) => console.log(theme),
+    (err) => console.error(err)
+  );
 });
+// app.get("/api/reviews", function(req, res) {
+//   Survey.find()
+//     .then(survey => res.json(survey))
+//     .catch(err => res.status(400).json("Error" + err));
+//     return res.send(customers);
+// });
 
 app.use("/", router);
 
