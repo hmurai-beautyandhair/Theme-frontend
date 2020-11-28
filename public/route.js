@@ -1,95 +1,72 @@
-var but = 0;
-var rating = 0;
-var length = 0;
-$(document).ready(function() {
-  $("#next").click(function() {
-    $("#first").addClass("hide");
-    $(".container").removeClass("hide");
-  });
-  $("#submit").click(function() {
-    $(".container").addClass("hide");
-    $("#third").removeClass("hide");
-  });
-  $("#customerForm").submit(function(e) {
+$(document).ready(function () {
+  $("#customerForm").submit(function (e) {
     e.preventDefault();
     console.log("text");
     postData();
   });
-  console.log("tjhtujy");
+  $("#submit1").click(function (e) {
+    $("#submit1").addClass("hide");
+    $("#spin").removeClass("hide");
+  });
+  $("#submit2").click(function (e) {
+    $("#submit2").addClass("hide");
+    $("#spin2").removeClass("hide");
+  });
 
-  function postData() {
-    var data = {
-      firstname: $("#firstname").val(),
-      lastname: $("#lastname").val(),
-      date: new Date(0),
-      review: $("#area").val(),
-      mark: but
-    };
-    console.log("data", data);
+  function postData1() {
     $.ajax({
       type: "POST",
       contentType: "application/json",
-      url: window.location + "api/customers/save",
-      data: JSON.stringify(data),
+      url: window.location + "/wigoutlet",
+      // data: JSON.stringify(data),
       dataType: "json",
-      success: function(customer) {
-        $("#postResultDiv").html("<p>" + "Post Successfully! <br>" + "</p>");
+      success: function (customer) {
+        $("#spin").addClass("hide");
+        $("#postResultDiv1").html("<p>" + "Post Successfully! <br>" + "</p>");
       },
-      error: function(e) {
+      error: function (e) {
         alert("e");
         console.log("ERROR: ", e);
-      }
-    });
-    resetForm();
-  }
-
-  $("#allCustomers").click(function(event) {
-    event.preventDefault();
-    ajaxGet();
-  });
-
-  // DO GET
-  function ajaxGet() {
-    $.ajax({
-      type: "GET",
-      url: window.location + "api/reviews",
-      success: function(result) {
-        $("#getResultDiv ul").empty();
-        var custList = "";
-        $.each(result, function(i, customer) {
-          $("#getResultDiv .list-group").append(customer.review + "<br>");
-          if (customer.mark) rating += Number(customer.mark);
-          length = i + 1;
-        });
-        console.log("length", length);
-        console.log("Rating", Math.floor(rating / length).toFixed(1));
-        console.log("Success: ", result);
       },
-      error: function(e) {
-        $("#getResultDiv").html("<strong>Error</strong>");
+    });
+  }
+  function postData2() {
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: window.location + "/wigscom",
+      // data: JSON.stringify(data),
+      dataType: "json",
+      success: function (customer) {
+        $("#spin2").addClass("hide");
+        $("#postResultDiv2").html("<p>" + "Post Successfully! <br>" + "</p>");
+      },
+      error: function (e) {
+        alert("e");
         console.log("ERROR: ", e);
-      }
+      },
     });
   }
-
-  //   $("#mark1").click(function() {
-  //     let but = $(this).text();
-  //     console.log("button", but);
+  // function ajaxGet() {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: window.location + "api/reviews",
+  //     success: function(result) {
+  //       $("#getResultDiv ul").empty();
+  //       var custList = "";
+  //       $.each(result, function(i, customer) {
+  //         $("#getResultDiv .list-group").append(customer.review + "<br>");
+  //         if (customer.mark) rating += Number(customer.mark);
+  //         length = i + 1;
+  //       });
+  //       console.log("length", length);
+  //       console.log("Rating", Math.floor(rating / length).toFixed(1));
+  //       console.log("Success: ", result);
+  //     },
+  //     error: function(e) {
+  //       $("#getResultDiv").html("<strong>Error</strong>");
+  //       console.log("ERROR: ", e);
+  //     }
   //   });
-  function resetForm() {
-    $("#firstname").val(""), $("#lastname").val("");
-  }
-
-  for (let i = 1; i <= 10; i++) {
-    $(`#mark${i}`).click(function() {
-      but = Number($(this).text());
-      console.log("but", but);
-      $(this)
-        .parent()
-        .addClass("hide");
-      $("#level").addClass("hide");
-    });
-  }
-  console.log("but", but);
-  console.log("but", but);
+  // }
 });

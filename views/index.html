@@ -13,7 +13,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src='/route.js'></script>
 
 </head>
@@ -31,21 +32,31 @@
               <img class="card-img-top" style='padding-top: 2.1em' src="https://cdn.shopify.com/s/files/1/1410/9094/t/2/assets/logo.png?v=7731144886018667602" alt="Card image cap">
               
               <div  style='text-align: center; padding: 3em 0;' class="card-footer">
-                <buttontype="button" class="btn btn-outline-dark btn-lg">Update test store</button>
+                <button type="button" class="btn btn-outline-dark btn-lg" id='submit2'>Update test store</button>
+                <div id='spin2' class="spinner-border text-secondary hide" role="status">
+                    <span class="sr-only ">Loading...</span>
+                  </div>
+                  <div id='postResultDiv2'></div>
               </div>
+              
             </div>
             <div class="card">
                 <img class="card-img-top" src="https://cdn.shopify.com/s/files/1/1165/9138/files/wig_outlet_logo_250x100px_v4_x175.png?v=1544124519" alt="Card image cap">
                 
                 <div style='text-align: center; padding: 3em 0;' class="card-footer">
-                  <button type="button" class="btn btn-outline-dark btn-lg">Update test store</button>
+                    <div id='spin' class="spinner-border text-secondary hide" role="status">
+                        <span class="sr-only ">Loading...</span>
+                      </div>
+                  <button type="button" class="btn btn-outline-dark btn-lg" id='submit1'>Update test store</button>
+                 <div id='postResultDiv1'></div>
+                
                 </div>
               </div>
-            
+             
           </div>
 
     </div>
-    
+
 
 </body>
 
