@@ -21,9 +21,10 @@ $(document).ready(function () {
       contentType: "application/json",
       url: window.location + "wigoutlet",
       dataType: "json",
-      success: function (customer) {
+      success: function (data) {
         $("#spin").addClass("hide");
         $("#postResultDiv1").html("Post Successfully! ");
+        $("#postResultDiv10").html('Info: ' + data.name );
       },
       error: function (e) {
         alert("e");
@@ -37,9 +38,11 @@ $(document).ready(function () {
       contentType: "application/json",
       url: window.location + "wigscom",
       dataType: "json",
-      success: function (customer) {
+      success: function (data) {
+        console.log('Api call', data)
         $("#spin2").addClass("hide");
         $("#postResultDiv2").html("Post Successfully!");
+        $("#postResultDiv20").html('Info: ' + data.name );
       },
       error: function (e) {
         alert("e");

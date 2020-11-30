@@ -51,7 +51,7 @@ app.get("/", function(req, res) {
 app.post("/wigscom", function(req, res) {
   shopify1.theme
   .create({
-    "name": `New-theme ${date2}`,
+    "name": `Wigs-test-store-${date2}`,
     "src": "http://scripts.wigs.com/shopify/theme-backups/wigs.com/Current/files.zip",
     // "role": "main"
   })
@@ -66,7 +66,7 @@ app.post("/wigscom", function(req, res) {
 app.post("/wigoutlet", function(req, res) {
   shopify2.theme
   .create({
-    "name": `New-theme ${date2}`,
+    "name": `WigOutlet-dev-${date2}`,
     "src": "https://scripts.wigs.com/shopify/theme-backups/wigoutlet.com/Current/files.zip",
     
     // "role": "main"
