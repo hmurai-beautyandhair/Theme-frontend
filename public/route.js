@@ -7,22 +7,23 @@ $(document).ready(function () {
   $("#submit1").click(function (e) {
     $("#submit1").addClass("hide");
     $("#spin").removeClass("hide");
+    postData1()
   });
   $("#submit2").click(function (e) {
     $("#submit2").addClass("hide");
     $("#spin2").removeClass("hide");
+    postData2()
   });
 
   function postData1() {
     $.ajax({
       type: "POST",
       contentType: "application/json",
-      url: window.location + "/wigoutlet",
-      // data: JSON.stringify(data),
+      url: window.location + "wigoutlet",
       dataType: "json",
       success: function (customer) {
         $("#spin").addClass("hide");
-        $("#postResultDiv1").html("<p>" + "Post Successfully! <br>" + "</p>");
+        $("#postResultDiv1").html("Post Successfully! ");
       },
       error: function (e) {
         alert("e");
@@ -34,12 +35,11 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       contentType: "application/json",
-      url: window.location + "/wigscom",
-      // data: JSON.stringify(data),
+      url: window.location + "wigscom",
       dataType: "json",
       success: function (customer) {
         $("#spin2").addClass("hide");
-        $("#postResultDiv2").html("<p>" + "Post Successfully! <br>" + "</p>");
+        $("#postResultDiv2").html("Post Successfully!");
       },
       error: function (e) {
         alert("e");
